@@ -29,7 +29,7 @@ async function main() {
 				user_age = Number(input("Enter your age: "))
 				user_balance = Number(input("Enter your balance: "))
 				try {
-					await user.addUser(u_location, user_name, user_age, user_balance)
+					await user.addUserToFile(u_location, user_name, user_age, user_balance)
 				} catch (err) {
 					console.error(err)
 				}
@@ -38,14 +38,14 @@ async function main() {
 				investment_type = input("Enter investment type: ")
 				investment_amt = Number(input("Enter investment amount: "))
 				try {
-					await invest.addInvestment(i_location, investment_type, investment_amt)
+					await invest.addInvestmentToFile(i_location, investment_type, investment_amt)
 				} catch (err) {
 					console.error(err)
 				}
 				break
 			case 3:
 				try {
-					let output = await user.readUser(u_location)
+					let output = await user.readUserFromFile(u_location)
 					console.log(output)
 				} catch (err) {
 					console.error(err)
@@ -53,7 +53,7 @@ async function main() {
 				break
 			case 4:
 				try {
-					let output = await invest.readInvestment(i_location)
+					let output = await invest.readInvestmentFromFile(i_location)
 					console.log(output)
 				} catch (err) {
 					console.error(err)
@@ -61,17 +61,21 @@ async function main() {
 				break
 			case 5:
 				try {
-					db.exportToDB(u_location, i_location)
+					await db.exportToDB(u_location, i_location)
 				} catch (err) {
 					console.error(err)
 				}
 				break
 			case 6:
-				// import
+				try {
+					await db.importFromDB([u_location, i_location])
+				} catch (err) {
+					console.error(err)
+				}
 				break
 			case 7:
 				console.log("Exit")
-				return
+				process.exit(1)
 			default:
 				console.error("Invalid option")
 				break;

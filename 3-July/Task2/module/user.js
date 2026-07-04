@@ -1,7 +1,6 @@
 const fsOperation = require("fs");
-const path = require('path');
 
-function addUser(filename, name, age, balance) {
+function addUserToFile(filename, name, age, balance) {
 	return new Promise((resolve, rejects) => {
 		if (name == "" || age <= 0) {
 			return rejects("Invalid name or age");
@@ -16,7 +15,7 @@ function addUser(filename, name, age, balance) {
 	})
 }
 
-function readUser(filename) {
+function readUserFromFile(filename) {
 	return new Promise((resolve, rejects) => {
 		fsOperation.readFile(filename, 'utf-8', (err, data) => {
 			if (err) {
@@ -27,4 +26,4 @@ function readUser(filename) {
 	})
 }
 
-module.exports = { addUser, readUser}
+module.exports = { addUserToFile, readUserFromFile}

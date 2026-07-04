@@ -5,9 +5,7 @@ const menu = `
 =================================
 1. Add Student Details
 2. Display Student detail
-3. Export database
-4. Import database
-5. Exit
+3. Exit
 =================================
 `;
 

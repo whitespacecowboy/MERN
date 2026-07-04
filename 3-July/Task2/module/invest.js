@@ -1,7 +1,6 @@
 const fsOperation = require("fs")
-const path = require('path');
 
-function addInvestment(filename, type, amt) {
+function addInvestmentToFile(filename, type, amt) {
 	return new Promise((resolve, reject) => {
 		buffer = [type, amt]
 		fsOperation.appendFile(filename, `${buffer.toString()}\n`, 'utf-8', (err) => {
@@ -13,7 +12,7 @@ function addInvestment(filename, type, amt) {
 	})
 }
 
-function readInvestment(filename) {
+function readInvestmentFromFile(filename) {
 	return new Promise((resolve, reject) => {
 		fsOperation.readFile(filename, 'utf-8', (err, data) => {
 			if(err) {
@@ -24,4 +23,4 @@ function readInvestment(filename) {
 	}) 
 }
 
-module.exports = {addInvestment, readInvestment}
+module.exports = {addInvestmentToFile, readInvestmentFromFile}
