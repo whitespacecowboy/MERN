@@ -1,0 +1,39 @@
+const mongoose = require("mongoose");
+
+mongoose.connect('mongodb://localhost:27017/MyDB')
+    .then(() => console.log("connected to DB"))
+    .catch((err) => console.error(err))
+
+const studentSchema = new mongoose.Schema({
+    name: String,
+    age: Number,
+    course: String
+})
+
+const Student =  mongoose.model('MyTable', studentSchema)
+
+// async function createStudent() {
+//     const student = new Student({
+//         name: "Manvir",
+//         age: 18,
+//         course: "BCA"
+//     });
+//     const result = await student.save();
+
+//     console.log(result)
+// }
+
+async function getStudents() {
+    const result = await Student.find()
+    for(i = 0; i < result.length; i++) {
+        console.log("============================")
+        console.log("Id: ", result[i]._id.toString())
+        console.log("Name: ", result[i].name)
+        console.log("Age: ", result[i].age)
+        console.log("Course: ", result[i].course)
+        console.log("============================")
+    }
+}
+
+// createStudent()
+getStudents()

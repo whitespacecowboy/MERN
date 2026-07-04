@@ -1,0 +1,5 @@
+Manvir,299,28
+satnam,24,2424
+sf,24,242
+jf,NaN,4
+jf,NaN,NaN
