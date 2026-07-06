@@ -50,5 +50,5 @@ const deleteStudent = async () => {
     console.log(result);
 };
 
-// createStudent("Harmeet", 29, "mern" )
-updateStudent()
+createStudent("Harmeet", 29, "mern" )
+updateStudent({name: "Harmeet"}, {name: "Sasuke"})

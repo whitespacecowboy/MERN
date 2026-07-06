@@ -1,101 +1,62 @@
-const mongoos = require("mongoose")
 const minimist = require("minimist");
 
 const args = minimist(process.argv.slice(2));
+const {deleteEmployee, updateEmployee, insertEmployee, readEmployee, exit} = require("./database");
 
-if (process.argv.length <= 2) {
-    console.error("Insufficent arguments")
-}
-
-try {
-    mongoos.connect('mongodb://localhost:27017/Employee')
-} catch (error) {
-    console.error(error)
-}
-
-const EmployeeSchema = mongoos.Schema({
-    empID: Number,
-    name: String,
-    department: String,
-    designation: String,
-    salary: Number
-})
-
-const EmployeeHandle = mongoos.model("Employee_table", EmployeeSchema)
-
-async function readEmployee(attributes) {
-    const result = await EmployeeHandle.find(attributes)
-    for (i = 0; i < result.length; i++) {
-        console.log("============================")
-        console.log("Id: ", result[i].empID)
-        console.log("Name: ", result[i].name)
-        console.log("Department:: ", result[i].department)
-        console.log("Desination: ", result[i].designation)
-        console.log("Salary: ", result[i].salary)
-    }
-    console.log("============================")
-}
-
-async function updateEmployee(what, to) {
-    console.log(what)
-    console.log(to)
-    let result = await EmployeeHandle.updateOne(what, to)
-    console.log(result)
-}
-
-async function insertEmployee(attributes) {
-    const Employ = new EmployeeHandle({
-        empID: attributes.empID,
-        name: attributes.name,
-        department: attributes.department,
-        designation: attributes.designation,
-        salary: attributes.salary
-    });
-    await Employ.save();
-}
-
-async function deleteEmployee(attr) {
-    if (await EmployeeHandle.deleteOne(attr)) {
-        console.log("Deleted record successfully");
-    } else {
-        console.error("Something went wrong")
-    }
+function parseArgs(parameters) {
+	let from = {}
+	let to = {}
+	for (i of Object.keys(parameters)) {
+		if (i[0] == 'f') {
+			from[i.slice(1)] = parameters[i];
+		} else if (i[0] == 't') {
+			to[i.slice(1)] = parameters[i];
+		} else {
+			console.error("Invalid argument")
+			return
+		}
+	}
+	return [from, to]
 }
 
 async function main() {
-    const { _, ...para } = args
-    switch (process.argv[2]) {
-        case 'insert':
-            await insertEmployee(
-                {
-                    empID: args.empID,
-                    name: args.name,
-                    department: args.department,
-                    designation: args.designation,
-                    salary: args.salary
-                }
-            )
-        break;
-        case 'update':
-            await updateEmployee(
-                JSON.parse(args.where),
-                JSON.parse(args.to)
-            )
-            break;
-        case 'delete':
-            await deleteEmployee(para)
-            break;
-        case 'read':
-            await readEmployee(para)
-            break
-        case 'help':
-            console.log("<OPERATION> <ARGS> <VALUE>")
-            break;
-        default:
-            console.error("Incorrect Argument")
-            break;
-    }
-    process.exit(1)
+	if (process.argv.length <= 2) {
+		console.error("Insufficent arguments")
+		return -1;
+	}
+	const { _, ...parameters } = args
+	switch (process.argv[2]) {
+		case 'insert':
+			await insertEmployee(
+				{
+					empID: args.empID,
+					name: args.name,
+					department: args.department,
+					designation: args.designation,
+					salary: args.salary
+				}
+			)
+			break;
+		case 'update':
+			await updateEmployee(parseArgs(parameters))
+			break;
+		case 'delete':
+			await deleteEmployee(parameters)
+			break;
+		case 'read':
+			await readEmployee(parameters)
+			break
+		case 'help':
+			let filename = __filename.split('/')
+			filename = filename[filename.length - 1]
+			console.log(`node ${filename} <OTP> <ARGS>`)
+			console.log(`node ${filename} [insert|read|delete] --name <name> --empID <id> --department <dep> --designation <des> --salary <sal>`)
+			console.log(`node ${filename} update --f[name|empID|department|designation|salary] --t[name|empID|department|designation|salary]`)
+			break;
+		default:
+			console.error("Incorrect Argument")
+			break;
+	}
+	exit()
 }
-
 main()
