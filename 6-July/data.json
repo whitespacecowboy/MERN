@@ -1,0 +1,52 @@
+[
+    {
+        "name": "Aarav Sharma",
+        "age": 21,
+        "course": "MERN"
+    },
+    {
+        "name": "Priya Verma",
+        "age": 22,
+        "course": "Python"
+    },
+    {
+        "name": "Rohan Mehta",
+        "age": 20,
+        "course": "Data Science"
+    },
+    {
+        "name": "Ananya Gupta",
+        "age": 23,
+        "course": "Java Full Stack"
+    },
+    {
+        "name": "Karan Singh",
+        "age": 24,
+        "course": "React"
+    },
+    {
+        "name": "Sneha Kapoor",
+        "age": 21,
+        "course": "Node.js"
+    },
+    {
+        "name": "Aditya Joshi",
+        "age": 22,
+        "course": "MERN"
+    },
+    {
+        "name": "Neha Bansal",
+        "age": 20,
+        "course": "Python"
+    },
+    {
+        "name": "Vikram Malhotra",
+        "age": 25,
+        "course": "DevOps"
+    },
+    {
+        "name": "Isha Arora",
+        "age": 23,
+        "course": "UI/UX"
+    }
+]
