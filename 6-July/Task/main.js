@@ -1,7 +1,8 @@
 const minimist = require("minimist");
+const path = require("path")
 
 const args = minimist(process.argv.slice(2));
-const {deleteEmployee, updateEmployee, insertEmployee, readEmployee, exit} = require("./database");
+const { deleteEmployee, updateEmployee, insertEmployee, readEmployee, exit } = require("./database");
 
 function parseArgs(parameters) {
 	let from = {}
@@ -26,6 +27,12 @@ async function main() {
 	}
 	const { _, ...parameters } = args
 	switch (process.argv[2]) {
+		case 'help':
+			let filename = path.basename(__filename)
+			console.log(`node ${filename} <OTP> <ARGS>`)
+			console.log(`node ${filename} [insert|read|delete] --name <name> --empID <id> --department <dep> --designation <des> --salary <sal>`)
+			console.log(`node ${filename} update --f[name|empID|department|designation|salary] --t[name|empID|department|designation|salary]`)
+			break;
 		case 'insert':
 			await insertEmployee(
 				{
@@ -46,13 +53,6 @@ async function main() {
 		case 'read':
 			await readEmployee(parameters)
 			break
-		case 'help':
-			let filename = __filename.split('/')
-			filename = filename[filename.length - 1]
-			console.log(`node ${filename} <OTP> <ARGS>`)
-			console.log(`node ${filename} [insert|read|delete] --name <name> --empID <id> --department <dep> --designation <des> --salary <sal>`)
-			console.log(`node ${filename} update --f[name|empID|department|designation|salary] --t[name|empID|department|designation|salary]`)
-			break;
 		default:
 			console.error("Incorrect Argument")
 			break;

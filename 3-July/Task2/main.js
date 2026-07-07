@@ -54,7 +54,7 @@ async function main() {
 			case 4:
 				try {
 					let output = await invest.readInvestmentFromFile(i_location)
-					console.log(output)
+					// console.log(output)
 				} catch (err) {
 					console.error(err)
 				}
