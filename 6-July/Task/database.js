@@ -1,20 +1,26 @@
 const mongoos = require("mongoose")
 
-try {
-	mongoos.connect('mongodb://localhost:27017/Employee')
-} catch (error) {
-	console.error(error)
+let EmployeeHandle;
+
+async function connect() {
+	try {
+		await mongoos.connect('mongodb://localhost:27017/Employee', {serverSelectionTimeoutMS: 3000})
+	} catch (error) {
+		throw new Error("Database didn't not connect")
+	}
+
+	const EmployeeSchema = mongoos.Schema({
+		empID: Number,
+		name: String,
+		department: String,
+		designation: String,
+		salary: Number
+	})
+
+	EmployeeHandle = mongoos.model("Employee_table", EmployeeSchema)
+
 }
 
-const EmployeeSchema = mongoos.Schema({
-	empID: Number,
-	name: String,
-	department: String,
-	designation: String,
-	salary: Number
-})
-
-const EmployeeHandle = mongoos.model("Employee_table", EmployeeSchema)
 
 async function readEmployee(attributes) {
 	const records = await EmployeeHandle.find(attributes)
@@ -24,7 +30,7 @@ async function readEmployee(attributes) {
 		return
 	}
 
-	for (i = 0; i < records.length; i++) {
+	for (let i = 0; i < records.length; i++) {
 		console.log("============================")
 		console.log("Id: ", records[i].empID)
 		console.log("Name: ", records[i].name)
@@ -69,8 +75,8 @@ async function deleteEmployee(attr) {
 	}
 }
 
-function exit() {
-	mongoos.connection.close()
+async function exit() {
+	await mongoos.connection.close()
 }
 
-module.exports = {exit, deleteEmployee, updateEmployee, insertEmployee, readEmployee}
+module.exports = {exit, deleteEmployee, updateEmployee, insertEmployee, readEmployee, connect}

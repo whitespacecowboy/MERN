@@ -2,12 +2,12 @@ const minimist = require("minimist");
 const path = require("path")
 
 const args = minimist(process.argv.slice(2));
-const { deleteEmployee, updateEmployee, insertEmployee, readEmployee, exit } = require("./database");
+const { deleteEmployee, updateEmployee, insertEmployee, readEmployee, exit, connect} = require("./database");
 
 function parseArgs(parameters) {
 	let from = {}
 	let to = {}
-	for (i of Object.keys(parameters)) {
+	for (const i of Object.keys(parameters)) {
 		if (i[0] == 'f') {
 			from[i.slice(1)] = parameters[i];
 		} else if (i[0] == 't') {
@@ -25,14 +25,27 @@ async function main() {
 		console.error("Insufficent arguments")
 		return -1;
 	}
-	const { _, ...parameters } = args
-	switch (process.argv[2]) {
-		case 'help':
+
+
+	if (process.argv[2] == 'help') {
 			let filename = path.basename(__filename)
 			console.log(`node ${filename} <OTP> <ARGS>`)
 			console.log(`node ${filename} [insert|read|delete] --name <name> --empID <id> --department <dep> --designation <des> --salary <sal>`)
 			console.log(`node ${filename} update --f[name|empID|department|designation|salary] --t[name|empID|department|designation|salary]`)
-			break;
+
+		return -1
+	}
+
+	try {
+		await connect()
+	} catch (err) {
+		console.error(err)
+		return -1
+	}
+
+	const { _, ...parameters } = args
+
+	switch (process.argv[2]) {
 		case 'insert':
 			await insertEmployee(
 				{

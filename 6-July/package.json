@@ -1,7 +1,0 @@
-{
-  "dependencies": {
-    "minimist": "^1.2.8",
-    "mongoose": "^9.7.3",
-    "prompt-sync": "^4.2.0"
-  }
-}

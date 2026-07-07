@@ -1,7 +1,0 @@
-{
-  "dependencies": {
-    "mongoos": "^0.0.1-security",
-    "mongoose": "^9.7.3",
-    "prompt-sync": "^4.2.0"
-  }
-}
