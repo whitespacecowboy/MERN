@@ -1,12 +1,31 @@
 const express = require("express")
-const router = express.Router()
-const path = require("path")
+const {addBooking, searchBooking, getBooking} = require("../services/bookingServices")
 
-router.get("/", (req, res) => {
-    let filename = path.join(__dirname, "..", "public", "index.html")
-    res.redirect(filename)
+const app = express()
+const path = require("path")
+const PORT = 3000
+
+const public_d = path.join(__dirname, "..", "public")
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static(public_d))
+
+
+app.get("/", (req, res) => {
+	let filename = path.join(public_d, 'index.html')
+	res.render(filename)
 });
 
-router.listen(3000, () => {
-    console.log("Server URL: http://localhost:3000");
+app.post("/add", async (req, res) => {
+	await addBooking(req.body)	
+	console.log(req.body)
+});
+
+app.post("/search", (req, res) => {
+	console.log(req.body)
+});
+
+app.listen(PORT, () => {
+	console.info("Server URL: http://localhost:3000");
 });

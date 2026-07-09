@@ -1,21 +1,26 @@
 const mongoose = require("mongoose")
 
-try {
-    await mongoose.connect("mongodb://localhost:27017/booking")
-} catch (err) {
-    console.log(err)
-    process.exit(1)
+async function connectDB() {
+	try {
+		await mongoose.connect("mongodb://localhost:27017/booking")
+		console.info("Datbase connected successfully")
+	} catch (err) {
+		console.log(err)
+		process.exit(1)
+	}
 }
 
+connectDB()
+
 const Ticket = mongoose.Schema({
-    id: Number,
-    customer: String,
-    movie_name: String,
-    time: String,
-    seat: Number,
-    price: Number
+	bookingid: Number,
+	customerName: String,
+	movieName: String,
+	showTime: Date,
+	seatNo: String,
+	ticketPrice: Number
 })
 
-let TicketHandler = mongoose.model("ticket_table", Ticket)
+const TicketHandler = mongoose.model("ticket_table", Ticket)
 
-module.exports = TicketHandler
+module.exports = { TicketHandler }

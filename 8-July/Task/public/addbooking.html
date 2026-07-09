@@ -7,23 +7,23 @@
 </head>
 <body>
     <a href="index.html">back</a>
-   <form action="" method="POST">
-        <label for="customer_name">Customer Name </label>
-        <input type="text" id="customer_name" name="customer_name" required> <br>
+   <form action="/add" method="POST">
+        <label for="customerName">Customer Name </label>
+        <input type="text" id="customer_name" name="customerName" required> <br>
 
-        <label for="movie_name">Movie Name</label>
-        <input type="text" id="movie_name" name="movie_name" required> <br>
+        <label for="movieName">Movie Name</label>
+        <input type="text" id="movie_name" name="movieName" required> <br>
 
-        <label for="show_time">Show Time</label>
-        <input type="time" id="show_time" name="show_name" required> <br>
+        <label for="showTime">Show Time</label>
+        <input type="time" id="show_time" name="showTime" required> <br>
 
-        <label for="seat_number">Seat Number</label>
-        <input type="number" id="seat_number" name="seat_number" required> <br>
+        <label for="seatNo">Seat Number</label>
+        <input type="string" id="seatNo" name="seatNo" value="Eg. A10" required> <br>
 
-        <label for="price">Price</label>
-        <input type="number" id="price" name="price" required> <br>
+        <label for="ticketPrice">Price</label>
+        <input type="number" id="price" name="ticketPrice" required> <br>
 
-        <input type="button" value="Submit">
+        <input type="submit" value="Submit">
    </form> 
 </body>
 </html>

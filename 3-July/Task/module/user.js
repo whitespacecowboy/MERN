@@ -1,11 +1,11 @@
 const fsOperation = require("fs");
 
-function addUserToFile(filename, name, age, balance) {
+function addUserToFile(filename, buffer) {
 	return new Promise((resolve, rejects) => {
-		if (name == "" || age <= 0) {
+		if (buffer[0] == "" || buffer[1] <= 0) {
 			return rejects("Invalid name or age");
 		}
-		buffer = [ name, age, balance ]
+		console.log(`${buffer}\n`)
 		fsOperation.appendFile(filename, `${buffer.toString()}\n`, 'utf-8', (err) => {
 			if (err) {
 				return rejects(err.message)

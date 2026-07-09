@@ -34,7 +34,7 @@ async function main() {
 			case 2:
 				investment_type = input("Enter investment type: ")
 				investment_amt = Number(input("Enter investment amount: "))
-					await invest.addInvestmentToFile(i_location, [investment_type, investment_amt])
+				await invest.addInvestmentToFile(i_location, [investment_type, investment_amt])
 				break
 			case 3:
 				output = await user.readUserFromFile(u_location)
@@ -45,10 +45,10 @@ async function main() {
 				console.log(output)
 				break
 			case 5:
-					await db.exportToDB(u_location, i_location)
+				await db.exportToDB(u_location, i_location)
 				break
 			case 6:
-					await db.importFromDB([u_location, i_location])
+				await db.importFromDB([u_location, i_location])
 				break
 			case 7:
 				console.log("Exit")
@@ -61,8 +61,4 @@ async function main() {
 	}
 }
 
-try {
-	main()
-} catch (err) {
-	console.error(err)
-}
+main()
