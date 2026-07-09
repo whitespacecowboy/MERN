@@ -2,7 +2,7 @@ const { TicketHandler } = require("../models/booking")
 
 async function insertIntoDB(info) {
 	const Ticket = new TicketHandler({
-		// bookingid: info.bookingid,
+		bookingId: Number(info.bookingId),
 		customerName: info.customerName,
 		movieName: info.movieName,
 		showTime: Date(info.showTime),
@@ -10,12 +10,13 @@ async function insertIntoDB(info) {
 		ticketPrice: Number(info.ticketPrice)
 	})
 	const status = await Ticket.save()
-	// console.log(status)
+	if (status) {
+		console.info("Data inserted successfully")
+	}
 }
 
 async function searchInDB(info) {
-	const status = await TicketHandler.find(info)
-	// console.info(status)
+	 return await TicketHandler.find(info)
 }
 
 module.exports = {insertIntoDB, searchInDB}

@@ -13,7 +13,7 @@ async function connectDB() {
 connectDB()
 
 const Ticket = mongoose.Schema({
-	bookingid: Number,
+	bookingId: Number,
 	customerName: String,
 	movieName: String,
 	showTime: Date,
