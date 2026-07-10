@@ -19,22 +19,7 @@ async function addBooking(info) {
 }
 
 async function searchBooking(info) {
-	let data = await db.searchInDB(info)
-	console.log(data)
+	return await db.searchInDB(info)
 }
-
-
-async function main() {
-	addBooking({
-		bookingId: 4,
-		customerName: 'name2',
-		movieName: 'movie2',
-		showTime: '05:30',
-		seatNo: 'f24',
-		ticketPrice: 24
-	})
-}
-
-main()
 
 module.exports = {addBooking, searchBooking}

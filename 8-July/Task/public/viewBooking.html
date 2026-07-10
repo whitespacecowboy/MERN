@@ -1,12 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>View Booking</title>
-	</head>
-	<body>
-		<a href="index.html">back</a>
-		<form action="/viewall" method="GET"></form>
-	</body>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>View Booking</title>
+</head>
+
+<body>
+	<a href="index.html">back</a>
+	<!-- <form action="/viewall" method="GET">
+		<input type="submit" value="viewall">
+	</form> -->
+
+	<script>
+		window.addEventListener('DOMContentLoaded', () => {
+			fetch('./viewall')
+				.then(response => response.json())
+				.then(data => console.log(data))
+				.catch(err => console.error(err));
+		});
+	</script>
+</body>
+
 </html>
