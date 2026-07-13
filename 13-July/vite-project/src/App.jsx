@@ -1,10 +1,32 @@
 // import { useState } from 'react'
 import './App.css'
 
+function DropDown() {
+	return (
+		<button>Drop Down</button>
+	)
+}
+
 function Main() {
-  return (
-	  <p>Hello world</p>
-  )
+	const weekDays = [
+		"Monday",
+		"Tuesday",
+		"...",
+		"Sunday"
+	]
+
+	return (
+		<>
+		<DropDown/>
+		{
+			weekDays.map(day => {
+			return (
+				<p>{day}</p>
+			)}
+		)
+		}
+		</>
+	)
 }
 
 export default Main

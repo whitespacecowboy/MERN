@@ -4,7 +4,7 @@ import './index.css'
 import Okay from './App.jsx'
 
 createRoot(document.getElementById('root')).render(
-  <StrictMode>
-	<Okay/>
-  </StrictMode>,
+	<StrictMode>
+		<Okay/>
+	</StrictMode>
 )
