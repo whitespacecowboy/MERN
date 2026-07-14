@@ -1,0 +1,22 @@
+[
+    {
+        "id": 1,
+        "name": "JIMS"
+    },
+    {
+        "id": 2,
+        "name": "Maharaja Agrasen Institute of Technology"
+    },
+    {
+        "id": 3,
+        "name": "Bharati Vidyapeeth"
+    },
+    {
+        "id": 4,
+        "name": "Guru Gobind Singh Indraprastha University"
+    },
+    {
+        "id": 5,
+        "name": "Delhi Technological University"
+    }
+]
