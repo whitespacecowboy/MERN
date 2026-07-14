@@ -6,13 +6,14 @@ import HelloF from './components/hello_f'
 import collages from './data/collages.json'
 
 function App() {
-  return (
-    <>
-      <p>Hello world</p>
-      <HelloC />
-      <HelloF name="Manvir" company="Satnam" list={collages}/>
-    </>
-  )
+	console.log("This works")	
+	// return (
+	// 	<>
+	// 		<p>Hello world</p>
+	// 		<HelloC />
+	// 		<HelloF name="Manvir" company="Satnam" list={collages} />
+	// 	</>
+	// )
 }
 
 export default App
