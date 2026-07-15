@@ -26,7 +26,12 @@ let StringArray: string[] = []
 // 	return x
 // }
 
-// const fillArray: void = (x: number) => {
+//                          TYPE               ANON_F
+// SCOPE FUNCTION_NAME: (TYPE => RETURN) = (PARAMETERS...) => {
+//     BODY
+// }
+
+// const fillArray: (x: number) => void = (number) => {
 // 	console.log('fill array')
 // 	console.log(x)
 // }

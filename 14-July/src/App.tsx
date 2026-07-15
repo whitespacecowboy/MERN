@@ -5,15 +5,13 @@ import HelloC from './components/hello_c'
 import HelloF from './components/hello_f'
 import collages from './data/collages.json'
 
+import { MyContext } from './context/MyContext'
+
 function App() {
-	console.log("This works")	
-	// return (
-	// 	<>
-	// 		<p>Hello world</p>
-	// 		<HelloC />
-	// 		<HelloF name="Manvir" company="Satnam" list={collages} />
-	// 	</>
-	// )
+	return (
+		<>
+		</>
+	)
 }
 
 export default App

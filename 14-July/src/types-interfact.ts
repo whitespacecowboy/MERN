@@ -13,6 +13,8 @@ let obj: Obj = {
 	x: 42
 }
 
+console.log(typeof obj)
+
 let optional: Obj = { x: 424 }
 
 console.log(optional)
