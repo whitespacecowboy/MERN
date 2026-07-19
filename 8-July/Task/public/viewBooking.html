@@ -1,72 +1,63 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html>
+
+</html>
 
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>View Booking</title>
+	<title>View Bookings</title>
 </head>
 
-<body>
-	<a href="index.html">back</a>
-	<form action="/viewall" method="GET">
-		<input type="submit" value="viewall">
-	</form>
+<style>
+	#bookingTable, tr, th, td {
+		border: 1px solid;
+		<!-- border-collapse: collapse; -->
+	}
+</style>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", async () => {
-            try {
-                const response = await fetch("/viewall");
-                const data = await response.text(); // or response.json() if it returns JSON
-                // document.getElementById("output").innerHTML = data;
-                console.log(data)
-            } catch (err) {
-                console.error(err);
-            }
-        });
-    </script>
+<body>
+	<a href="index.html">Back</a>
+
+	<table id="bookingTable" cellspacing=0 cellpadding=0>
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>Cutomer name</th>
+				<th>Movie name</th>
+				<th>Date</th>
+				<th>Room no</th>
+				<th>Price</th>
+			</tr>
+		</thead>
+		<tbody></tbody>
+	</table>
+
+	<script>
+		document.addEventListener("DOMContentLoaded", async () => {
+			try {
+				const response = await fetch("/viewall");
+				const bookings = await response.json();
+
+				const tbody = document.querySelector("#bookingTable tbody");
+
+				bookings.forEach(booking => {
+					const row = document.createElement("tr");
+
+					row.innerHTML = `
+								<td>${booking.bookingId}</td>
+								<td>${booking.customerName}</td>
+								<td>${booking.movieName}</td>
+								<td>${booking.showTime}</td>
+								<td>${booking.seatNo}</td>
+								<td>${booking.ticketPrice}</td>
+						  `;
+					tbody.appendChild(row);
+				});
+			} catch (err) {
+				console.error(err);
+			}
+		});
 	</script>
-</body> -->
-</html>
-<body>
-    <a href="index.html">Back</a>
-
-    <table border="1" id="bookingTable">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Room</th>
-                <th>Date</th>
-            </tr>
-        </thead>
-        <tbody></tbody>
-    </table>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", async () => {
-            try {
-                const response = await fetch("/viewall");
-                const bookings = await response.json();
-
-                const tbody = document.querySelector("#bookingTable tbody");
-
-                bookings.forEach(booking => {
-                    const row = document.createElement("tr");
-
-                    row.innerHTML = `
-                        <td>${booking.bookingId}</td>
-                        <td>${booking.customerName}</td>
-                        <td>${booking.movieName}</td>
-                        <td>${booking.showTime}</td>
-                        <td>${booking.seatNo}</td>
-                        <td>${booking.ticketPrice}</td>
-                    `;
-                    tbody.appendChild(row);
-                });
-            } catch (err) {
-                console.error(err);
-            }
-        });
-    </script>
+<style>
+	#bookingTable {
+	}
+</style>
 </body>
